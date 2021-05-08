@@ -3,3 +3,4 @@
 | :---         |     :---:      |          ---: |
 | git status   | git status     | git status    |
 | git diff     | git diff       | git diff      |
+| reynaldo D   | prueba1.       | prueba2.      |

@@ -5,6 +5,10 @@
  */
 package Forms;
 
+import java.sql.Connection;
+
+import Clases.conexion;
+
 /**
  *
  * @author reyna
@@ -13,7 +17,8 @@ public class FormMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form FormMenu
-     */
+     */ 
+    
     public FormMenu() {
         initComponents();
     }

@@ -5,7 +5,6 @@
  */
 package Forms;
 
-import java.awt.Color;
 
 /**
  *
@@ -18,6 +17,7 @@ public class FormLogin extends javax.swing.JFrame {
      */
     public FormLogin() {
         initComponents();
+        FormLogin.this.setTitle("Sistema de Gestion y Pago de planillas");
         
     }
 

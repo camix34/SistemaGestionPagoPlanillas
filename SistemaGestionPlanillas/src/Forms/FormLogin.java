@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author reyna
  */
 public class FormLogin extends javax.swing.JFrame {
- public static final String URL = "jdbc:mysql://localhost:3306/dbprogramacion";
+ public static final String URL = "jdbc:mysql://localhost:3306/controldeplanillas";
         public static final String USERNAME = "root";
         public static final String PASSWORD = "";
     /**

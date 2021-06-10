@@ -25,7 +25,7 @@ public class conexion {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private final String base = "bdprogramacion";
+    private final String base = "control de planillas";
     private final String user = "root";
     private final String password = "";
     private final String url = "jdbc:mysql://localhost:3306/" + base;

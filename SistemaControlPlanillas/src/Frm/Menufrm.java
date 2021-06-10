@@ -7,6 +7,7 @@ package Frm;
 import Frm.loginfrm;
 import javax.swing.JOptionPane;
 import modelo.EntidadUsuario;
+import modelo.Seguridad;
 import modelo.UsuarioDao;
 
 /**
@@ -16,6 +17,7 @@ import modelo.UsuarioDao;
 public class Menufrm extends javax.swing.JFrame {
     UsuarioDao udao = new UsuarioDao();
     EntidadUsuario eu = new EntidadUsuario();
+    Seguridad nuevoPass = new Seguridad();
 
     /**
      * Creates new form Menufrm
@@ -386,6 +388,8 @@ public class Menufrm extends javax.swing.JFrame {
         String password=PasswordField.getText();
         String nombre=usuariofield.getText();
         String id_rol="Administrador";
+        String cadena = nuevoPass.ecnode(password);
+        
         
          
         
@@ -393,7 +397,7 @@ public class Menufrm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debe Ingresar Datos en las cajas de Texto");
             usuariofield.requestFocus();
         }else{
-            eu=udao.validarusuario(password, nombre, id_rol);
+            eu=udao.validarusuario(cadena, nombre, id_rol);
             if (eu.getNombre() != null && eu.getPassword() != null && eu.getId_rol() != null){
                 
                 if("Administrador".equals(id_rol)){

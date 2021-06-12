@@ -66,10 +66,36 @@ public ControTrabajadores(){
     }
     }
          
-             public boolean insertar(empleados p){
+    public boolean insertar(empleados p){
         
     try {
         String sqlConsulta ="INSERT INTO empleados(id_empleado,nombre,dui,cargo,direccion,telefono,fecha_contratacion) VALUES(null,'"+p.nombre+"','"+p.dui+"','"+p.cargo+"','"+p.direccion+"','"+p.telefono+"','"+p.fecha_contratacion+"')";
+        estate = conexion.createStatement();
+        estate.executeUpdate(sqlConsulta);
+        return true;
+    } catch (SQLException ex) {
+        Logger.getLogger(ControTrabajadores.class.getName()).log(Level.SEVERE, null, ex);
+        return false;
+    }
+    }
+    
+    public boolean editar(empleados p){
+        
+    try {
+        String sqlConsulta ="UPDATE empleados SET nombre='"+p.nombre+"',dui='"+p.dui+"',cargo='"+p.cargo+"',direccion='"+p.direccion+"',telefono='"+p.telefono+"' WHERE id_empleado="+p.id_empleado;
+        estate = conexion.createStatement();
+        estate.executeUpdate(sqlConsulta);
+        return true;
+    } catch (SQLException ex) {
+        Logger.getLogger(ControTrabajadores.class.getName()).log(Level.SEVERE, null, ex);
+        return false;
+    }
+    }
+    
+       public boolean Eliminar(int id){
+        
+    try {
+        String sqlConsulta ="DELETE FROM empleados WHERE id_empleado="+id;
         estate = conexion.createStatement();
         estate.executeUpdate(sqlConsulta);
         return true;

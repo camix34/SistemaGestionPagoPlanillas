@@ -34,10 +34,10 @@ Segundo Sprint backlog
 Tercer Sprint backlog
 | Objetivo del sprint | pendiente|En progreso |completado|
 |  :---         |      :---       |   :---  | :--- |
-| El objetivo de este sprint es completar la creación del sistema informatico y sus manueales, comprobando que no tenga errores que impidan el correcto funcionamiento del sistema como el cliente nos lo a pedido.|Creación de la base de dato:Tarea: 5.2 | |tarea: 5.1 diseño de la base de datos|
-| |Creación del login: |Tarea 6.2, 6.3Tarea:6.1 diseño del login||
-||Creación de la gestion de usuarios del sistema:Tarea 7.2, 7.3, 7.4. 7.5  |Tarea:7.1 diseño de ventana||
-||Creacón de la gestion de trabajadores:Tarea 8.2, 8.3, 8.4. 8.5  |Tarea:8.1 diseño de ventana||
+| El objetivo de este sprint es completar la creación del sistema informatico y sus manueales, comprobando que no tenga errores que impidan el correcto funcionamiento del sistema como el cliente nos lo a pedido.| | |Creación de la base de dato:Tarea: 5.2 5.1 diseño de la base de datos|
+| | ||Creación del login:Tarea 6.2, 6.3Tarea:6.1 diseño del login|
+||  ||Creación de la gestion de usuarios del sistema:Tarea:7.1, 7.2, 7.3, 7.4. 7.5|
+|| |Creacón de la gestion de trabajadores:Tarea 8.1, 8.2, 8.3, 8.4. 8.5 ||
 || Creación de la gestion de pago: Tarea 9.1, 9.2, 9.3, 9.4. 9.5|||
 | |Creacion del manual de programador:Tarea 10.1 |||
 ||Creacion del manual de sistemas y procedimientos:Tarea 11.1  |||

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2021 a las 18:57:39
+-- Tiempo de generación: 17-06-2021 a las 21:47:55
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.13
 
@@ -37,6 +37,14 @@ CREATE TABLE `empleados` (
   `fecha_contratacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id_empleado`, `nombre`, `dui`, `cargo`, `direccion`, `telefono`, `fecha_contratacion`) VALUES
+(1, 'rey', '878754', 'contador', 'dwdwdwedwfwf', '789-878', '2021-06-15'),
+(2, 'carlos', '6331', 'sastre', 'su casa', '8661-5454', '2021-06-10');
+
 -- --------------------------------------------------------
 
 --
@@ -48,9 +56,27 @@ CREATE TABLE `infopago` (
   `id_empleado` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `unidades` int(11) NOT NULL,
-  `descuento` int(11) NOT NULL,
-  `total_dia` int(11) NOT NULL
+  `descuento` double NOT NULL,
+  `total_dia` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `infopago`
+--
+
+INSERT INTO `infopago` (`id`, `id_empleado`, `fecha`, `unidades`, `descuento`, `total_dia`) VALUES
+(1, 1, '2021-06-15', 20, 0, 8),
+(2, 1, '2021-06-16', 15, 1, 7),
+(4, 1, '2021-06-16', 15, 1, 7),
+(5, 1, '2021-06-16', 29, 0, 10),
+(6, 1, '2021-06-16', 30, 0, 10),
+(7, 1, '2021-06-16', 1, 5, 3),
+(8, 1, '2021-06-16', 20, 0, 8),
+(9, 1, '2021-06-16', 15, 1.25, 6.75),
+(10, 2, '2021-06-17', 15, 1.25, 6.75),
+(11, 2, '2021-06-17', 20, 0, 8),
+(12, 2, '2021-06-19', 30, 0, 10),
+(13, 2, '2021-06-30', 15, 1.25, 6.75);
 
 -- --------------------------------------------------------
 
@@ -64,10 +90,17 @@ CREATE TABLE `pagoempleados` (
   `salario_base` double NOT NULL,
   `isss` double NOT NULL,
   `afp` double NOT NULL,
-  `descuento` double NOT NULL,
+  `descuento` double DEFAULT NULL,
   `fecha_pago` date NOT NULL,
   `salario_total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pagoempleados`
+--
+
+INSERT INTO `pagoempleados` (`id_pago`, `id_empleado`, `salario_base`, `isss`, `afp`, `descuento`, `fecha_pago`, `salario_total`) VALUES
+(2, 2, 31.5, 0.95, 2.28, 0, '2021-06-30', 28.27);
 
 -- --------------------------------------------------------
 
@@ -138,19 +171,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `infopago`
 --
 ALTER TABLE `infopago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pagoempleados`
 --
 ALTER TABLE `pagoempleados`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

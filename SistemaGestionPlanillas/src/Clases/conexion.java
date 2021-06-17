@@ -24,7 +24,7 @@ public class conexion {
     private final String user = "root";
     private final String password = "";
     private final String url = "jdbc:mysql://localhost:3306/" + base;
-    private Connection con = null;
+    Connection con;
     
       
       
@@ -35,7 +35,7 @@ public class conexion {
           try {
               Class.forName("com.mysql.cj.jdbc.Driver");
               con = DriverManager.getConnection(this.url,this.user,this.password);
-              JOptionPane.showMessageDialog(null, "Conexion exitosa");
+             // JOptionPane.showMessageDialog(null, "Conexion exitosa");
           } catch (SQLException e) {
               System.out.println(e);
               

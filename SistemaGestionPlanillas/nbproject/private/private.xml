@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Forms/FormLogin.java</file>
-            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Clases/Empleados.java</file>
-            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Clases/conexion.java</file>
-            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Forms/FormMenu.java</file>
+            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Clases/InfoPago.java</file>
+            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Forms/FormPlanilla.java</file>
+            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Clases/Pago.java</file>
+            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Clases/ConsultaPago.java</file>
+            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Forms/FormPago.java</file>
+            <file>file:/D:/Documentos/sistema/SistemaGestionPagoPlanillas/SistemaGestionPlanillas/src/Clases/ConsultaInfoPago.java</file>
         </group>
     </open-files>
 </project-private>

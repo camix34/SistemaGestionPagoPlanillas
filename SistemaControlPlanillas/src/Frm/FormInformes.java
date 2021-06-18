@@ -4,6 +4,22 @@
  * and open the template in the editor.
  */
 package Frm;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
+import modelo.Conexion;
 
 /**
  *
@@ -41,6 +57,11 @@ public class FormInformes extends javax.swing.JFrame {
         });
 
         btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reporte.png"))); // NOI18N
+        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpleadosActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel11.setText("Generar ficha de Empleados");
@@ -84,6 +105,82 @@ public class FormInformes extends javax.swing.JFrame {
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
+        // TODO add your handling code here:
+         Document documento = new Document();
+        
+        
+        try {
+           /* 
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream("D:\\Documentos\\reporte.pdf"));
+            
+            */
+           
+           File home = FileSystemView.getFileSystemView().getHomeDirectory();
+           String absPath = home.getAbsolutePath();
+           PdfWriter.getInstance(documento, new FileOutputStream(absPath +"\\Ficha_Empleados.pdf"));
+           
+           
+           
+            documento.open();
+            
+             Paragraph para = new Paragraph("FICHA DE EMPLEADOS\n\n\n");
+             documento.add(para);
+            
+            PdfPTable tabla = new PdfPTable(7);
+                    
+                    tabla.addCell("Id Empleado");
+                    tabla.addCell("Nombre");
+                    tabla.addCell("DUI");
+                    tabla.addCell("Cargo");
+                    tabla.addCell("Direccion");
+                    tabla.addCell("Telefono");
+                    tabla.addCell("Fecha Contratacion");
+                    
+                    
+                    try {
+                        
+                        Conexion conn = new Conexion();
+                        Connection con = conn.Conectar();
+                        PreparedStatement pst = con.prepareStatement("SELECT * FROM empleados");
+                        
+                        ResultSet rs = pst.executeQuery();
+                        
+                        
+                        if(rs.next()){
+                        
+                            do{
+                                
+                                tabla.addCell(rs.getString("id_empleado"));
+                                tabla.addCell(rs.getString("nombre"));
+                                tabla.addCell(rs.getString("dui"));
+                                tabla.addCell(rs.getString("cargo"));
+                                tabla.addCell(rs.getString("direccion"));
+                                tabla.addCell(rs.getString("telefono"));
+                                tabla.addCell(rs.getString("fecha_contratacion"));
+                                
+                            
+                            }while(rs.next());
+                                    
+                                    documento.add(tabla);
+                        
+                        }else{
+                        
+                        
+                        }
+                
+            } catch (DocumentException | SQLException e) {
+            }
+                    
+             documento.close();
+            JOptionPane.showMessageDialog(null, "Informe creado en el Escritorio de la Computadora");
+            
+        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+        }
+        
+    }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     /**
      * @param args the command line arguments

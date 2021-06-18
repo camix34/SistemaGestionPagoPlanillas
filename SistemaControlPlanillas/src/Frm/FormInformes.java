@@ -17,6 +17,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 import modelo.Conexion;
@@ -32,6 +34,12 @@ public class FormInformes extends javax.swing.JFrame {
      */
     public FormInformes() {
         initComponents();
+        
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+
+        //CAMPOS DE TEXTO MODIFICACION
+        tlineFecha.setText(formatoFecha.format(fecha));
     }
 
     /**
@@ -46,6 +54,10 @@ public class FormInformes extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnEmpleados = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        tlineFecha = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,22 +76,49 @@ public class FormInformes extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel11.setText("Generar ficha de Empleados");
+        jLabel11.setText("Generar informe planilla de pago");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel12.setText("Generar ficha de Empleados");
+
+        jLabel5.setText("Fecha final de mes:");
+
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reporte.png"))); // NOI18N
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                 .addComponent(btnEmpleados)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel11)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGap(131, 131, 131))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tlineFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(48, 48, 48)
+                    .addComponent(jLabel12)
+                    .addContainerGap(418, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,12 +127,24 @@ public class FormInformes extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEmpleados))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel11)))
-                .addContainerGap(253, Short.MAX_VALUE))
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel11)
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(tlineFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEmpleados)
+                        .addGap(108, 108, 108))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(141, 141, 141)
+                    .addComponent(jLabel12)
+                    .addContainerGap(279, Short.MAX_VALUE)))
         );
 
         pack();
@@ -108,7 +159,95 @@ public class FormInformes extends javax.swing.JFrame {
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
         // TODO add your handling code here:
-         Document documento = new Document();
+        
+         
+        
+         if(tlineFecha.getText().isEmpty()){
+         
+         JOptionPane.showMessageDialog(null, "Ingrese la fecha final de mes de la planilla");
+         
+         }else{
+         
+          try {
+              Date fecha = java.sql.Date.valueOf(tlineFecha.getText());
+               Document documento = new Document();
+        
+           
+           File home = FileSystemView.getFileSystemView().getHomeDirectory();
+           String absPath = home.getAbsolutePath();
+           PdfWriter.getInstance(documento, new FileOutputStream(absPath +"\\Planilla.pdf"));
+           
+           
+           
+            documento.open();
+            
+             Paragraph para = new Paragraph("Planilla de Pago "+fecha+" \n\n\n");
+             documento.add(para);
+            
+            PdfPTable tabla = new PdfPTable(6);
+                    
+                    
+                    tabla.addCell("Nombre");
+                    tabla.addCell("Salario Base");
+                    tabla.addCell("ISSS");
+                    tabla.addCell("AFP");
+                    tabla.addCell("FECHA PAGO");
+                    tabla.addCell("SALARIO TOTAL");
+                    
+                    
+                    try {
+                        
+                        
+                        
+                        Conexion conn = new Conexion();
+                        Connection con = conn.Conectar();
+                        PreparedStatement pst = con.prepareStatement("SELECT nombre,salario_base,isss,afp,fecha_pago,salario_total FROM pagoempleados where fecha_pago='"+fecha+"'");
+                        
+                        ResultSet rs = pst.executeQuery();
+                        
+                        
+                        if(rs.next()){
+                        
+                            do{
+                                
+                                
+                                tabla.addCell(rs.getString(1));
+                                tabla.addCell(rs.getString(2));
+                                tabla.addCell(rs.getString(3));
+                                tabla.addCell(rs.getString(4));
+                                tabla.addCell(rs.getString(5));
+                                tabla.addCell(rs.getString(6));
+                                
+                            
+                            }while(rs.next());
+                                    
+                                    documento.add(tabla);
+                        
+                        }else{
+                        
+                        
+                        }
+                
+            } catch (DocumentException | SQLException e) {
+            }
+                    
+             documento.close();
+            JOptionPane.showMessageDialog(null, "Informe creado en el Escritorio de la Computadora");
+            
+        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+        }
+         
+         
+         }
+        
+       
+        
+    }//GEN-LAST:event_btnEmpleadosActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+
+        Document document = new Document();
         
         
         try {
@@ -120,14 +259,14 @@ public class FormInformes extends javax.swing.JFrame {
            
            File home = FileSystemView.getFileSystemView().getHomeDirectory();
            String absPath = home.getAbsolutePath();
-           PdfWriter.getInstance(documento, new FileOutputStream(absPath +"\\Ficha_Empleados.pdf"));
+           PdfWriter.getInstance(document, new FileOutputStream(absPath +"\\Ficha_Empleados.pdf"));
            
            
            
-            documento.open();
+            document.open();
             
              Paragraph para = new Paragraph("FICHA DE EMPLEADOS\n\n\n");
-             documento.add(para);
+             document.add(para);
             
             PdfPTable tabla = new PdfPTable(7);
                     
@@ -164,7 +303,7 @@ public class FormInformes extends javax.swing.JFrame {
                             
                             }while(rs.next());
                                     
-                                    documento.add(tabla);
+                                    document.add(tabla);
                         
                         }else{
                         
@@ -174,13 +313,13 @@ public class FormInformes extends javax.swing.JFrame {
             } catch (DocumentException | SQLException e) {
             }
                     
-             documento.close();
+             document.close();
             JOptionPane.showMessageDialog(null, "Informe creado en el Escritorio de la Computadora");
             
         } catch (DocumentException | HeadlessException | FileNotFoundException e) {
         }
-        
-    }//GEN-LAST:event_btnEmpleadosActionPerformed
+
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +359,12 @@ public class FormInformes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmpleados;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField tlineFecha;
     // End of variables declaration//GEN-END:variables
 }

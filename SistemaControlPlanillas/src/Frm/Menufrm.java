@@ -231,6 +231,11 @@ public class Menufrm extends javax.swing.JFrame {
         jLabel11.setText("Costura");
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/reporte.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setBackground(new java.awt.Color(0, 0, 0));
         jLabel12.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
@@ -412,6 +417,16 @@ public class Menufrm extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        FormInformes in = new FormInformes();
+        in.setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
    public void validar(){
         String password=PasswordField.getText();
         String nombre=usuariofield.getText();

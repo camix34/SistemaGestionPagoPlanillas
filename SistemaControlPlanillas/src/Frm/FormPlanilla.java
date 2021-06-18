@@ -47,6 +47,7 @@ public class FormPlanilla extends javax.swing.JFrame {
         
         tlineFechaI.setText(formatoFecha.format(fecha));
         tlineFechaF.setText(formatoFecha.format(fecha));
+        tlineNombre.setVisible(true);
         
         
         
@@ -80,11 +81,11 @@ public class FormPlanilla extends javax.swing.JFrame {
 
             modelo.addColumn("ID PAGO");
             modelo.addColumn("ID_empleado");
+            modelo.addColumn("nombre");
             modelo.addColumn("salario base");
             modelo.addColumn("isss");
             modelo.addColumn("afp");
-            modelo.addColumn("descuento");
-            modelo.addColumn("fecha pago");
+            modelo.addColumn("fecha Planilla");
             modelo.addColumn("salario total");
 
             while (rs.next()) {
@@ -191,6 +192,7 @@ public class FormPlanilla extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        tlineNombre = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaPago = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
@@ -402,6 +404,10 @@ public class FormPlanilla extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addGap(200, 200, 200)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(tlineNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
@@ -416,6 +422,8 @@ public class FormPlanilla extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tlineNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsertar)
                     .addComponent(btnEliminar)))
@@ -504,6 +512,7 @@ public class FormPlanilla extends javax.swing.JFrame {
 
         TableModel model = TablaEmpleado.getModel();
         tlineIdEmpleado.setText("" + model.getValueAt(TablaEmpleado.getSelectedRow(), 0));
+        tlineNombre.setText("" + model.getValueAt(TablaEmpleado.getSelectedRow(), 1));
 
     }//GEN-LAST:event_TablaEmpleadoMouseClicked
 
@@ -536,8 +545,10 @@ public class FormPlanilla extends javax.swing.JFrame {
                             mod.setFechafinal(Date.valueOf(tlineFechaF.getText()));
          
                             Double salario = modC.salarioBase(mod);
+                            
 
                            tlineSalarioBase.setText(String.valueOf(salario));
+                           
                            
                            tlineISSS.setText(String.valueOf(mod.calculoISSS(salario)));
                            tlineAFP.setText(String.valueOf(mod.calculoAFP(salario)));
@@ -584,12 +595,14 @@ public class FormPlanilla extends javax.swing.JFrame {
                 //Procedimiento de insertar
             
                 mod.setIdempleado(tlineIdEmpleado.getText());
+                mod.setNombre(tlineNombre.getText());
                 mod.setSalario_base(Double.parseDouble(tlineSalarioBase.getText()));
                 mod.setIsss(Double.parseDouble(tlineISSS.getText()));
                 mod.setAfp(Double.parseDouble(tlineAFP.getText()));
                 mod.setDescuento(0.0);
                 mod.setTotal(Double.parseDouble(tlineTotal.getText()));
                 mod.setFecha(Date.valueOf(tlineFechaF.getText()));
+                
             
                 
                 if (modC.registrar(mod)) {
@@ -734,6 +747,7 @@ public class FormPlanilla extends javax.swing.JFrame {
     private javax.swing.JTextField tlineISSS;
     private javax.swing.JTextField tlineId;
     private javax.swing.JTextField tlineIdEmpleado;
+    private javax.swing.JTextField tlineNombre;
     private javax.swing.JTextField tlineSalarioBase;
     private javax.swing.JTextField tlineTotal;
     // End of variables declaration//GEN-END:variables

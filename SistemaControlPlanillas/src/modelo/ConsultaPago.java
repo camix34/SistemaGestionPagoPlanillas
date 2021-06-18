@@ -28,15 +28,15 @@ public class ConsultaPago extends Conexion{
        
         Connection con = conn.Conectar();
 
-        String sql = "INSERT INTO pagoempleados (id_empleado,salario_base,isss, afp, descuento, fecha_pago,salario_total) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO pagoempleados (id_empleado,nombre,salario_base,isss, afp, fecha_pago,salario_total) VALUES(?,?,?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, Integer.parseInt(p.getIdempleado()));
-            ps.setDouble(2, p.getSalario_base());
-            ps.setDouble(3, p.getIsss());
-            ps.setDouble(4, p.getAfp());
-            ps.setDouble(5, p.getDescuento());
+            ps.setString(2, p.getNombre());
+            ps.setDouble(3, p.getSalario_base());
+            ps.setDouble(4, p.getIsss());
+            ps.setDouble(5, p.getAfp());
             ps.setDate(6, p.getFecha());
             ps.setDouble(7, p.getTotal());
 
@@ -160,5 +160,7 @@ public class ConsultaPago extends Conexion{
         }
        
     }
+    
+    
     
 }

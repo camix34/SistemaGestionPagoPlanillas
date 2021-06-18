@@ -24,6 +24,15 @@ public class Pago {
     private Double total;
     private Date fechainicial;
     private Date fechafinal;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Date getFechainicial() {
         return fechainicial;

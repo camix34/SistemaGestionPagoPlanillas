@@ -38,9 +38,9 @@ Tercer Sprint backlog
 | | ||Creación del login:Tarea 6.2, 6.3Tarea:6.1 diseño del login|
 ||  ||Creación de la gestion de usuarios del sistema:Tarea:7.1, 7.2, 7.3, 7.4. 7.5|
 || | |Creacón de la gestion de trabajadores:Tarea 8.1, 8.2, 8.3, 8.4. 8.5|
-|| Creación de la gestion de pago: 9.2, 9.3, 9.4. 9.5Tarea 9.1|||
+|| ||Creación de la gestion de pago: 9.2, 9.3, 9.4. 9.5Tarea 9.1|
 | ||Creacion del manual de programador:Tarea 10.1 ||
-||Creacion del manual de sistemas y procedimientos:Tarea 11.1  |||
+||  |Creacion del manual de sistemas y procedimientos:Tarea 11.1||
 
 
 

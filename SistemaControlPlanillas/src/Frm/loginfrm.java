@@ -17,31 +17,30 @@ import modelo.Seguridad;
  * @author gabri
  */
 public class loginfrm extends javax.swing.JFrame {
+
     UsuarioDao udao = new UsuarioDao();
     EntidadUsuario eu = new EntidadUsuario();
     Seguridad nuevoPass = new Seguridad();
+
     /**
      * Creates new form loginfrm
      */
     public loginfrm() {
         initComponents();
-        
+
         InsertUsuario iu = new InsertUsuario();
-                
-        String nombre="admin";
-        String pass="admin";
-        String es="Administrador";
-        
-          String cadena = nuevoPass.ecnode(pass);
-                    Object[] ob=new Object[3];
-                    ob[0]=nombre;
-                    ob[1]=cadena;
-                    ob[2]=es;
-                    iu.add(ob);
-        
-       
-         
-       
+
+        String nombre = "admin";
+        String pass = "admin";
+        String es = "Administrador";
+
+        String cadena = nuevoPass.ecnode(pass);
+        Object[] ob = new Object[3];
+        ob[0] = nombre;
+        ob[1] = cadena;
+        ob[2] = es;
+        iu.add(ob);
+
     }
 
     /**
@@ -145,37 +144,34 @@ public class loginfrm extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-    
-    public void validar(){
-        String password=PasswordField.getText();
-        String nombre=usuariofield.getText();
-        String id_rol=(String)jComboBox1.getSelectedItem();
+
+    public void validar() {
+        String password = PasswordField.getText();
+        String nombre = usuariofield.getText();
+        String id_rol = (String) jComboBox1.getSelectedItem();
         String cadena = nuevoPass.ecnode(password);
-        
-         
-        
-        if (usuariofield.getText().equals("") ||PasswordField.getText().equals("")){
+
+        if (usuariofield.getText().equals("") || PasswordField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe Ingresar Datos en las cajas de Texto");
             usuariofield.requestFocus();
-        }else{
-            eu=udao.validarusuario(cadena, nombre, id_rol);
-            if (eu.getNombre() != null && eu.getPassword() != null && eu.getId_rol() != null){
-                
+        } else {
+            eu = udao.validarusuario(cadena, nombre, id_rol);
+            if (eu.getNombre() != null && eu.getPassword() != null && eu.getId_rol() != null) {
+
                 Menufrm m = new Menufrm();
                 m.setVisible(true);
                 dispose();
-            
-               
-                
-            }else{
-                
+
+            } else {
+
                 JOptionPane.showMessageDialog(this, "Debe Ingresar usuarios validos");
                 usuariofield.requestFocus();
             }
 
         }
-    
+
     }
+
     /**
      * @param args the command line arguments
      */

@@ -13,7 +13,11 @@ import java.sql.ResultSet;
  *
  * @author gabri
  */
+//Clase para manejar las consultas de la tabla usuarios
+
 public class UsuarioDao {
+    
+    //atributos
     PreparedStatement ps;
     ResultSet rs;
     
@@ -21,6 +25,9 @@ public class UsuarioDao {
     Conexion con = new Conexion();
     Connection acceso;
     
+    //METODOS
+    
+    //Funcion para validar si el usuario y password son correctos en la base de datos
     public EntidadUsuario validarusuario(String password ,String nombre,String id_rol){
         String sql="SELECT * FROM Usuario WHERE password=? and nombre=? and id_rol=?";
         try {

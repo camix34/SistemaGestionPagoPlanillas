@@ -17,12 +17,14 @@ import modelo.Seguridad;
  * @author gabri
  */
 public class UsuariosFrm extends javax.swing.JFrame {
+
     InsertUsuario iu = new InsertUsuario();
     EntidadUsuario eu = new EntidadUsuario();
-    DefaultTableModel modelo=new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel();
     Seguridad nuevoPass = new Seguridad();
-    
+
     int id;
+
     /**
      * Creates new form UsuariosFrm
      */
@@ -30,16 +32,16 @@ public class UsuariosFrm extends javax.swing.JFrame {
         initComponents();
         Listar();
     }
-    
-    void Listar(){
-        List<EntidadUsuario> lista=iu.listar();
-        modelo=(DefaultTableModel)tabla.getModel();
-        Object[]ob=new Object[4];
+
+    void Listar() {
+        List<EntidadUsuario> lista = iu.listar();
+        modelo = (DefaultTableModel) tabla.getModel();
+        Object[] ob = new Object[4];
         for (int i = 0; i < lista.size(); i++) {
-            ob[0]=lista.get(i).getId();
-            ob[1]=lista.get(i).getNombre();
-            ob[2]=lista.get(i).getPassword();
-            ob[3]=lista.get(i).getId_rol();
+            ob[0] = lista.get(i).getId();
+            ob[1] = lista.get(i).getNombre();
+            ob[2] = lista.get(i).getPassword();
+            ob[3] = lista.get(i).getId_rol();
             modelo.addRow(ob);
         }
         tabla.setModel(modelo);
@@ -274,7 +276,7 @@ public class UsuariosFrm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         actualizar();
         limpiartabla();
         Listar();
@@ -298,25 +300,21 @@ public class UsuariosFrm extends javax.swing.JFrame {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
-        int fila =tabla.getSelectedRow();
-        if(fila==-1){
+        int fila = tabla.getSelectedRow();
+        if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una fila");
-        }else{
+        } else {
             id = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
             String nom = tabla.getValueAt(fila, 1).toString();
             String pass = tabla.getValueAt(fila, 2).toString();
             String es = tabla.getValueAt(fila, 3).toString();
             String cadena = nuevoPass.deecnode(pass);
-            
-       
-            
+
             txtnombre.setText(nom);
             txtpass.setText(cadena);
             txtrepit.setText(cadena);
             combousuario.setSelectedItem(es);
-            
-            
-            
+
         }
     }//GEN-LAST:event_tablaMouseClicked
 
@@ -324,91 +322,95 @@ public class UsuariosFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
         nuevo();
     }//GEN-LAST:event_jButton5ActionPerformed
-    void agregar(){
-        String nom=txtnombre.getText();
-        String pass=txtpass.getText();
-        String repit=txtrepit.getText();
-        String es=combousuario.getSelectedItem().toString();
-        if (txtnombre.getText().equals("") || txtpass.getText().equals("")||txtrepit.getText().equals("")) {
+    void agregar() {
+        String nom = txtnombre.getText();
+        String pass = txtpass.getText();
+        String repit = txtrepit.getText();
+        String es = combousuario.getSelectedItem().toString();
+        if (txtnombre.getText().equals("") || txtpass.getText().equals("") || txtrepit.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe Ingresar Datos en las cajas de Texto");
             txtnombre.requestFocus();
-        }else{
+        } else {
             if (pass == null ? repit == null : pass.equals(repit)) {
-                if("Tipo de Usuario".equals(es)){
+                if ("Tipo de Usuario".equals(es)) {
                     JOptionPane.showMessageDialog(this, "Seleccione un tipo de Usuario");
-                }else{
+                } else {
                     String cadena = nuevoPass.ecnode(pass);
-                    Object[] ob=new Object[3];
-                    ob[0]=nom;
-                    ob[1]=cadena;
-                    ob[2]=es;
+                    Object[] ob = new Object[3];
+                    ob[0] = nom;
+                    ob[1] = cadena;
+                    ob[2] = es;
                     iu.add(ob);
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "La contraseña no coinciden");
             }
         }
-        
-                
+
     }
-    void actualizar(){
-        String nom=txtnombre.getText();
-        String pass=txtpass.getText();
-        String repit=txtrepit.getText();
-        String es=combousuario.getSelectedItem().toString();
-        int fila= tabla.getSelectedRow();
-        if (txtnombre.getText().equals("") || txtpass.getText().equals("")||txtrepit.getText().equals("")) {
+
+    void actualizar() {
+        String nom = txtnombre.getText();
+        String pass = txtpass.getText();
+        String repit = txtrepit.getText();
+        String es = combousuario.getSelectedItem().toString();
+        int fila = tabla.getSelectedRow();
+        if (txtnombre.getText().equals("") || txtpass.getText().equals("") || txtrepit.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe Ingresar Datos en las cajas de Texto");
             txtnombre.requestFocus();
-        }else{
+        } else {
             if (pass == null ? repit == null : pass.equals(repit)) {
-                if("Tipo de Usuario".equals(es)){
+                if ("Tipo de Usuario".equals(es)) {
                     JOptionPane.showMessageDialog(this, "Seleccione un tipo de Usuario");
-                }else{
-                    if(fila==-1){
+                } else {
+                    if (fila == -1) {
                         JOptionPane.showMessageDialog(this, "Debe seleccionar un usuario de la tabla");
-                    }else{
+                    } else {
                         String cadena = nuevoPass.ecnode(pass);
-                        Object[] ob=new Object[4];
-                        ob[0]=nom;
-                        ob[1]=cadena;
-                        ob[2]=es;
-                        ob[3]=id;
+                        Object[] ob = new Object[4];
+                        ob[0] = nom;
+                        ob[1] = cadena;
+                        ob[2] = es;
+                        ob[3] = id;
                         iu.actualizar(ob);
                         JOptionPane.showMessageDialog(this, "Se actualizo con exito");
                     }
-                    
+
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "La contraseña no coinciden");
             }
         }
     }
-    void eliminar(){
-        
-        int fila= tabla.getSelectedRow();
+
+    void eliminar() {
+
+        int fila = tabla.getSelectedRow();
         id = Integer.parseInt(tabla.getValueAt(fila, 0).toString());
-        if(fila==-1){
+        if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un usuario de la tabla");
-        }else{
+        } else {
             iu.eliminar(id);
-            
+
         }
     }
-    void nuevo(){
+
+    void nuevo() {
         txtnombre.setText("");
         txtpass.setText("");
         txtrepit.setText("");
         combousuario.setSelectedItem("Tipo de Usuario");
-    
+
     }
-    void limpiartabla(){
+
+    void limpiartabla() {
         for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);
-            i=i-1;
-            
+            i = i - 1;
+
         }
     }
+
     /**
      * @param args the command line arguments
      */

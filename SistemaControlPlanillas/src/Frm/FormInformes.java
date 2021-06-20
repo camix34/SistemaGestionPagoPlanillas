@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Frm;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -27,6 +28,7 @@ import modelo.Conexion;
  *
  * @author reyna
  */
+//Formualrio para gernerar los informes
 public class FormInformes extends javax.swing.JFrame {
 
     /**
@@ -34,7 +36,8 @@ public class FormInformes extends javax.swing.JFrame {
      */
     public FormInformes() {
         initComponents();
-        
+
+        //variables iniciales
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
@@ -159,163 +162,141 @@ public class FormInformes extends javax.swing.JFrame {
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
         // TODO add your handling code here:
-        
-         
-        
-         if(tlineFecha.getText().isEmpty()){
-         
-         JOptionPane.showMessageDialog(null, "Ingrese la fecha final de mes de la planilla");
-         
-         }else{
-         
-          try {
-              Date fecha = java.sql.Date.valueOf(tlineFecha.getText());
-               Document documento = new Document();
-        
-           
-           File home = FileSystemView.getFileSystemView().getHomeDirectory();
-           String absPath = home.getAbsolutePath();
-           PdfWriter.getInstance(documento, new FileOutputStream(absPath +"\\Planilla.pdf"));
-           
-           
-           
-            documento.open();
-            
-             Paragraph para = new Paragraph("Planilla de Pago "+fecha+" \n\n\n");
-             documento.add(para);
-            
-            PdfPTable tabla = new PdfPTable(6);
-                    
-                    
-                    tabla.addCell("Nombre");
-                    tabla.addCell("Salario Base");
-                    tabla.addCell("ISSS");
-                    tabla.addCell("AFP");
-                    tabla.addCell("FECHA PAGO");
-                    tabla.addCell("SALARIO TOTAL");
-                    
-                    
-                    try {
-                        
-                        
-                        
-                        Conexion conn = new Conexion();
-                        Connection con = conn.Conectar();
-                        PreparedStatement pst = con.prepareStatement("SELECT nombre,salario_base,isss,afp,fecha_pago,salario_total FROM pagoempleados where fecha_pago='"+fecha+"'");
-                        
-                        ResultSet rs = pst.executeQuery();
-                        
-                        
-                        if(rs.next()){
-                        
-                            do{
-                                
-                                
-                                tabla.addCell(rs.getString(1));
-                                tabla.addCell(rs.getString(2));
-                                tabla.addCell(rs.getString(3));
-                                tabla.addCell(rs.getString(4));
-                                tabla.addCell(rs.getString(5));
-                                tabla.addCell(rs.getString(6));
-                                
-                            
-                            }while(rs.next());
-                                    
-                                    documento.add(tabla);
-                        
-                        }else{
-                        
-                        
-                        }
-                
-            } catch (DocumentException | SQLException e) {
+
+        if (tlineFecha.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Ingrese la fecha final de mes de la planilla");
+
+        } else {
+
+            try {
+                Date fecha = java.sql.Date.valueOf(tlineFecha.getText());
+                Document documento = new Document();
+
+                File home = FileSystemView.getFileSystemView().getHomeDirectory();
+                String absPath = home.getAbsolutePath();
+                PdfWriter.getInstance(documento, new FileOutputStream(absPath + "\\Planilla.pdf"));
+
+                documento.open();
+
+                Paragraph para = new Paragraph("Planilla de Pago " + fecha + " \n\n\n");
+                documento.add(para);
+
+                PdfPTable tabla = new PdfPTable(6);
+
+                tabla.addCell("Nombre");
+                tabla.addCell("Salario Base");
+                tabla.addCell("ISSS");
+                tabla.addCell("AFP");
+                tabla.addCell("FECHA PAGO");
+                tabla.addCell("SALARIO TOTAL");
+
+                try {
+
+                    Conexion conn = new Conexion();
+                    Connection con = conn.Conectar();
+                    PreparedStatement pst = con.prepareStatement("SELECT nombre,salario_base,isss,afp,fecha_pago,salario_total FROM pagoempleados where fecha_pago='" + fecha + "'");
+
+                    ResultSet rs = pst.executeQuery();
+
+                    if (rs.next()) {
+
+                        do {
+
+                            tabla.addCell(rs.getString(1));
+                            tabla.addCell(rs.getString(2));
+                            tabla.addCell(rs.getString(3));
+                            tabla.addCell(rs.getString(4));
+                            tabla.addCell(rs.getString(5));
+                            tabla.addCell(rs.getString(6));
+
+                        } while (rs.next());
+
+                        documento.add(tabla);
+
+                    } else {
+
+                    }
+
+                } catch (DocumentException | SQLException e) {
+                }
+
+                documento.close();
+                JOptionPane.showMessageDialog(null, "Informe creado en el Escritorio de la Computadora");
+
+            } catch (DocumentException | HeadlessException | FileNotFoundException e) {
             }
-                    
-             documento.close();
-            JOptionPane.showMessageDialog(null, "Informe creado en el Escritorio de la Computadora");
-            
-        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+
         }
-         
-         
-         }
-        
-       
-        
+
+
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
 
         Document document = new Document();
-        
-        
+
         try {
-           /* 
+            /* 
             String ruta = System.getProperty("user.home");
             PdfWriter.getInstance(documento, new FileOutputStream("D:\\Documentos\\reporte.pdf"));
             
-            */
-           
-           File home = FileSystemView.getFileSystemView().getHomeDirectory();
-           String absPath = home.getAbsolutePath();
-           PdfWriter.getInstance(document, new FileOutputStream(absPath +"\\Ficha_Empleados.pdf"));
-           
-           
-           
+             */
+
+            File home = FileSystemView.getFileSystemView().getHomeDirectory();
+            String absPath = home.getAbsolutePath();
+            PdfWriter.getInstance(document, new FileOutputStream(absPath + "\\Ficha_Empleados.pdf"));
+
             document.open();
-            
-             Paragraph para = new Paragraph("FICHA DE EMPLEADOS\n\n\n");
-             document.add(para);
-            
+
+            Paragraph para = new Paragraph("FICHA DE EMPLEADOS\n\n\n");
+            document.add(para);
+
             PdfPTable tabla = new PdfPTable(7);
-                    
-                    tabla.addCell("Id Empleado");
-                    tabla.addCell("Nombre");
-                    tabla.addCell("DUI");
-                    tabla.addCell("Cargo");
-                    tabla.addCell("Direccion");
-                    tabla.addCell("Telefono");
-                    tabla.addCell("Fecha Contratacion");
-                    
-                    
-                    try {
-                        
-                        Conexion conn = new Conexion();
-                        Connection con = conn.Conectar();
-                        PreparedStatement pst = con.prepareStatement("SELECT * FROM empleados");
-                        
-                        ResultSet rs = pst.executeQuery();
-                        
-                        
-                        if(rs.next()){
-                        
-                            do{
-                                
-                                tabla.addCell(rs.getString("id_empleado"));
-                                tabla.addCell(rs.getString("nombre"));
-                                tabla.addCell(rs.getString("dui"));
-                                tabla.addCell(rs.getString("cargo"));
-                                tabla.addCell(rs.getString("direccion"));
-                                tabla.addCell(rs.getString("telefono"));
-                                tabla.addCell(rs.getString("fecha_contratacion"));
-                                
-                            
-                            }while(rs.next());
-                                    
-                                    document.add(tabla);
-                        
-                        }else{
-                        
-                        
-                        }
-                
+
+            tabla.addCell("Id Empleado");
+            tabla.addCell("Nombre");
+            tabla.addCell("DUI");
+            tabla.addCell("Cargo");
+            tabla.addCell("Direccion");
+            tabla.addCell("Telefono");
+            tabla.addCell("Fecha Contratacion");
+
+            try {
+
+                Conexion conn = new Conexion();
+                Connection con = conn.Conectar();
+                PreparedStatement pst = con.prepareStatement("SELECT * FROM empleados");
+
+                ResultSet rs = pst.executeQuery();
+
+                if (rs.next()) {
+
+                    do {
+
+                        tabla.addCell(rs.getString("id_empleado"));
+                        tabla.addCell(rs.getString("nombre"));
+                        tabla.addCell(rs.getString("dui"));
+                        tabla.addCell(rs.getString("cargo"));
+                        tabla.addCell(rs.getString("direccion"));
+                        tabla.addCell(rs.getString("telefono"));
+                        tabla.addCell(rs.getString("fecha_contratacion"));
+
+                    } while (rs.next());
+
+                    document.add(tabla);
+
+                } else {
+
+                }
+
             } catch (DocumentException | SQLException e) {
             }
-                    
-             document.close();
+
+            document.close();
             JOptionPane.showMessageDialog(null, "Informe creado en el Escritorio de la Computadora");
-            
+
         } catch (DocumentException | HeadlessException | FileNotFoundException e) {
         }
 

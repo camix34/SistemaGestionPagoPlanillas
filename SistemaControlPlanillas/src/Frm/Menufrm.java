@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Frm;
+
 import Frm.loginfrm;
 import javax.swing.JOptionPane;
 import modelo.EntidadUsuario;
@@ -15,6 +16,7 @@ import modelo.UsuarioDao;
  * @author gabri
  */
 public class Menufrm extends javax.swing.JFrame {
+
     UsuarioDao udao = new UsuarioDao();
     EntidadUsuario eu = new EntidadUsuario();
     Seguridad nuevoPass = new Seguridad();
@@ -24,10 +26,7 @@ public class Menufrm extends javax.swing.JFrame {
      */
     public Menufrm() {
         initComponents();
-        
-        
-        
-         
+
     }
 
     /**
@@ -376,16 +375,16 @@ public class Menufrm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-            FormEmpleados E = new FormEmpleados();
-            E.setVisible(true);
-            dispose();
+        FormEmpleados E = new FormEmpleados();
+        E.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-            UsuariosFrm u = new UsuariosFrm();
-            u.setVisible(true);
-            dispose();
+        UsuariosFrm u = new UsuariosFrm();
+        u.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void seccionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seccionbtnActionPerformed
@@ -402,64 +401,60 @@ public class Menufrm extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here
-        
+
         FormPago p = new FormPago();
         p.setVisible(true);
         dispose();
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
+
         FormPlanilla p = new FormPlanilla();
         p.setVisible(true);
         dispose();
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        
-        
+
         FormInformes in = new FormInformes();
         in.setVisible(true);
         dispose();
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
-   public void validar(){
-        String password=PasswordField.getText();
-        String nombre=usuariofield.getText();
-        String id_rol="Administrador";
+    public void validar() {
+        String password = PasswordField.getText();
+        String nombre = usuariofield.getText();
+        String id_rol = "Administrador";
         String cadena = nuevoPass.ecnode(password);
-        
-        
-         
-        
-        if (usuariofield.getText().equals("") ||PasswordField.getText().equals("")){
+
+        if (usuariofield.getText().equals("") || PasswordField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe Ingresar Datos en las cajas de Texto");
             usuariofield.requestFocus();
-        }else{
-            eu=udao.validarusuario(cadena, nombre, id_rol);
-            if (eu.getNombre() != null && eu.getPassword() != null && eu.getId_rol() != null){
-                
-                if("Administrador".equals(id_rol)){
-                    
-                   jButton2.setEnabled(true);
-                   jButton3.setEnabled(true);
-                   
+        } else {
+            eu = udao.validarusuario(cadena, nombre, id_rol);
+            if (eu.getNombre() != null && eu.getPassword() != null && eu.getId_rol() != null) {
+
+                if ("Administrador".equals(id_rol)) {
+
+                    jButton2.setEnabled(true);
+                    jButton3.setEnabled(true);
+
                 }
-               
-                
-            }else{
-                
+
+            } else {
+
                 JOptionPane.showMessageDialog(this, "Debe Ingresar usuarios validos");
                 usuariofield.requestFocus();
             }
 
         }
-    
+
     }
+
     /**
      * @param args the command line arguments
      */

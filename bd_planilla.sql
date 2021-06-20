@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2021 a las 00:36:42
+-- Tiempo de generación: 20-06-2021 a las 22:45:49
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.13
 
@@ -34,7 +34,7 @@ CREATE TABLE `empleados` (
   `cargo` varchar(100) NOT NULL,
   `direccion` varchar(200) NOT NULL,
   `telefono` varchar(15) NOT NULL,
-  `fecha_contratacion` date NOT NULL
+  `fecha_contratacion` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `empleados` (
 
 INSERT INTO `empleados` (`id_empleado`, `nombre`, `dui`, `cargo`, `direccion`, `telefono`, `fecha_contratacion`) VALUES
 (1, 'rey', '878754', 'contador', 'dwdwdwedwfwf', '789-878', '2021-06-15'),
-(2, 'carlos', '6331', 'sastre', 'su casa', '8661-5454', '2021-06-10');
+(2, 'nelson', '4545454554', 'Costurero/a', '7445', '44444', '2021-06-10');
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,6 @@ INSERT INTO `infopago` (`id`, `id_empleado`, `fecha`, `unidades`, `descuento`, `
 (4, 1, '2021-06-16', 15, 1, 7),
 (5, 1, '2021-06-16', 29, 0, 10),
 (6, 1, '2021-06-16', 30, 0, 10),
-(7, 1, '2021-06-16', 1, 5, 3),
 (8, 1, '2021-06-16', 20, 0, 8),
 (9, 1, '2021-06-16', 15, 1.25, 6.75),
 (10, 2, '2021-06-17', 15, 1.25, 6.75),
@@ -87,10 +86,10 @@ INSERT INTO `infopago` (`id`, `id_empleado`, `fecha`, `unidades`, `descuento`, `
 CREATE TABLE `pagoempleados` (
   `id_pago` int(11) NOT NULL,
   `id_empleado` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
   `salario_base` double NOT NULL,
   `isss` double NOT NULL,
   `afp` double NOT NULL,
-  `descuento` double DEFAULT NULL,
   `fecha_pago` date NOT NULL,
   `salario_total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -99,8 +98,9 @@ CREATE TABLE `pagoempleados` (
 -- Volcado de datos para la tabla `pagoempleados`
 --
 
-INSERT INTO `pagoempleados` (`id_pago`, `id_empleado`, `salario_base`, `isss`, `afp`, `descuento`, `fecha_pago`, `salario_total`) VALUES
-(2, 2, 31.5, 0.95, 2.28, 0, '2021-06-30', 28.27);
+INSERT INTO `pagoempleados` (`id_pago`, `id_empleado`, `nombre`, `salario_base`, `isss`, `afp`, `fecha_pago`, `salario_total`) VALUES
+(12, 1, 'rey', 0, 0, 0, '2021-06-17', 0),
+(13, 1, 'rey', 56.75, 1.7, 4.11, '2021-06-30', 50.94);
 
 -- --------------------------------------------------------
 
@@ -125,6 +125,14 @@ CREATE TABLE `usuario` (
   `password` varchar(50) NOT NULL,
   `id_rol` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `password`, `id_rol`) VALUES
+(2, 'admin', '1VWCq1wWjT4=', 'Administrador'),
+(5, 'rey', '9BmZCZe9FXc=', 'Usuario');
 
 --
 -- Índices para tablas volcadas
@@ -161,6 +169,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `nombre` (`nombre`),
   ADD KEY `usuario_ibfk_1` (`id_rol`);
 
 --
@@ -171,7 +180,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `infopago`
@@ -183,13 +192,13 @@ ALTER TABLE `infopago`
 -- AUTO_INCREMENT de la tabla `pagoempleados`
 --
 ALTER TABLE `pagoempleados`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

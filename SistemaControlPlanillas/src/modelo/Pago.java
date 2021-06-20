@@ -12,8 +12,11 @@ import java.sql.Date;
  *
  * @author reyna
  */
+
+//CLASE QUE TIENE LA INFORMACION PARA CREAR LAS PLANILLAS DE PAGO
 public class Pago {
     
+    //ATRIBUTOS
     private int id;
     private String idempleado;
     private Double salario_base;
@@ -26,6 +29,7 @@ public class Pago {
     private Date fechafinal;
     private String nombre;
 
+    //METODOS SET Y GET
     public String getNombre() {
         return nombre;
     }

@@ -15,6 +15,8 @@ import java.util.List;
  *
  * @author gabri
  */
+
+//Clase consultas de la tabla usuarios
 public class InsertUsuario implements CRUD {
     Connection con;
     Conexion cn=new Conexion();
@@ -22,7 +24,7 @@ public class InsertUsuario implements CRUD {
     ResultSet rs;
 
     @Override
-    public List listar() {
+    public List listar() {//funcion que retorna todos los registros de la tabla de Usuarios de la base de datos
         
        List<EntidadUsuario> lista = new ArrayList<>();
        String sql="SELECT * FROM usuario"; 
@@ -44,7 +46,7 @@ public class InsertUsuario implements CRUD {
     }
 
     @Override
-    public int add(Object[] o) {
+    public int add(Object[] o) {//funcion para insertar un usuario en la base de datos
         int r=0;
         String sql="INSERT INTO usuario(nombre,password,id_rol) VALUES(?,?,?)";
         try {
@@ -60,7 +62,7 @@ public class InsertUsuario implements CRUD {
     }
 
     @Override
-    public int actualizar(Object[] o) {
+    public int actualizar(Object[] o) {//funcion ppara actualizar la informacion de un usuario de la base de datos
         int r=0;
         String sql="UPDATE usuario SET nombre=? , password=? , id_rol=? WHERE id_usuario=?";
         try {
@@ -79,7 +81,7 @@ public class InsertUsuario implements CRUD {
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(int id) {//funcion para eliminar un usuario del sistema , almacenado en la base de datos
         String sql="DELETE FROM usuario WHERE id_usuario=?";
         try {
             con=cn.Conectar();

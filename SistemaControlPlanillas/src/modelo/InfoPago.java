@@ -8,8 +8,11 @@ import java.sql.Date;
  *
  * @author reyna
  */
+
+//Clase que contiene la informacion de la tbla de la base de datos Info pago
 public class InfoPago {
     
+    //atributos
     private int id;
     private String id_Empleado;
     private Date fecha;
@@ -17,6 +20,7 @@ public class InfoPago {
     private Double descuento;
     private Double total_dia;
 
+    //Metodos set y get
     public int getId() {
         return id;
     }

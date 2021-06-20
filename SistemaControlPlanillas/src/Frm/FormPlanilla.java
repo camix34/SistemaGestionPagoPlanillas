@@ -28,23 +28,22 @@ import javax.swing.table.TableModel;
  */
 public class FormPlanilla extends javax.swing.JFrame {
 
-    
-     public static DefaultTableModel modelTable;
+    public static DefaultTableModel modelTable;
     public static ResultSet registro;
     public static ControTrabajadores conn;
     public static Pago mod;
     public static ConsultaPago modC;
+
     /**
      * Creates new form FormPlanilla
      */
     public FormPlanilla() {
         initComponents();
-        
+
         java.util.Date fecha = new java.util.Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
 
         //CAMPOS DE TEXTO MODIFICACION
-        
         tlineFechaI.setText(formatoFecha.format(fecha));
         tlineFechaF.setText(formatoFecha.format(fecha));
         tlineNombre.setVisible(false);
@@ -55,18 +54,12 @@ public class FormPlanilla extends javax.swing.JFrame {
         tlineSalarioBase.setEditable(false);
         tlineTotal.setEditable(false);
         tlineFecha.setEditable(false);
-        
-        
-        
-        
+
         //Funciones iniciales
         recargar();
         Mostrar();
     }
-    
-    
-    
-    
+
     public void Mostrar() {
 
         try {
@@ -115,9 +108,7 @@ public class FormPlanilla extends javax.swing.JFrame {
         }
 
     }
-    
-    
-    
+
     public void recargar() {
         //creando la instancia de la clase
         conn = new ControTrabajadores();
@@ -150,16 +141,16 @@ public class FormPlanilla extends javax.swing.JFrame {
         conn.cerrarConexion();
 
     }
-    
-    public void Limpiar(){
-    
-    tlineAFP.setText("");
-    tlineISSS.setText("");
-    tlineId.setText("");
-    tlineIdEmpleado.setText("");
-    tlineSalarioBase.setText("");
-    tlineTotal.setText("");
-    
+
+    public void Limpiar() {
+
+        tlineAFP.setText("");
+        tlineISSS.setText("");
+        tlineId.setText("");
+        tlineIdEmpleado.setText("");
+        tlineSalarioBase.setText("");
+        tlineTotal.setText("");
+
     }
 
     /**
@@ -525,58 +516,48 @@ public class FormPlanilla extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
-        
-        
-        //Procedimiento
-        
-     
-          mod = new Pago();
-        modC = new ConsultaPago();
-        
-        if(tlineIdEmpleado.getText().isEmpty()){
-            
-       JOptionPane.showMessageDialog(null, "Seleccione al trabajador que le quiere realizar la planilla");
-        
- 
-        }else{
-            
-            
-            if(tlineFechaI.getText().isEmpty() || tlineFechaF.getText().isEmpty()){
-            
-            
-            JOptionPane.showMessageDialog(null, "Por favor rellen los campos con la fecha inicio de mes y fin de mes");
-            
-            }else{
-                            mod.setIdempleado(tlineIdEmpleado.getText());
-                            mod.setFechainicial(Date.valueOf(tlineFechaI.getText()));
-                            mod.setFechafinal(Date.valueOf(tlineFechaF.getText()));
-         
-                            Double salario = modC.salarioBase(mod);
-                            
 
-                           tlineSalarioBase.setText(String.valueOf(salario));
-                           
-                           
-                           tlineISSS.setText(String.valueOf(mod.calculoISSS(salario)));
-                           tlineAFP.setText(String.valueOf(mod.calculoAFP(salario)));
-                           
-                           Double salarioTotal = salario - mod.calculoISSS(salario) - mod.calculoAFP(salario);
-                           
-                           tlineTotal.setText(String.valueOf(salarioTotal));
-                           tlineFecha.setText(tlineFechaF.getText());
-            
-            
+        //Procedimiento
+        mod = new Pago();
+        modC = new ConsultaPago();
+
+        if (tlineIdEmpleado.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Seleccione al trabajador que le quiere realizar la planilla");
+
+        } else {
+
+            if (tlineFechaI.getText().isEmpty() || tlineFechaF.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(null, "Por favor rellen los campos con la fecha inicio de mes y fin de mes");
+
+            } else {
+                mod.setIdempleado(tlineIdEmpleado.getText());
+                mod.setFechainicial(Date.valueOf(tlineFechaI.getText()));
+                mod.setFechafinal(Date.valueOf(tlineFechaF.getText()));
+
+                Double salario = modC.salarioBase(mod);
+
+                tlineSalarioBase.setText(String.valueOf(salario));
+
+                tlineISSS.setText(String.valueOf(mod.calculoISSS(salario)));
+                tlineAFP.setText(String.valueOf(mod.calculoAFP(salario)));
+
+                Double salarioTotal = salario - mod.calculoISSS(salario) - mod.calculoAFP(salario);
+
+                tlineTotal.setText(String.valueOf(salarioTotal));
+                tlineFecha.setText(tlineFechaF.getText());
+
             }
-        
-        
+
         }
-        
-        
+
+
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
         // TODO add your handling code here:
-        
+
         mod = new Pago();
         modC = new ConsultaPago();
 
@@ -585,100 +566,92 @@ public class FormPlanilla extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "debe seleccionar un empleado para realizar la planilla");
 
         } else {
-        
-        if(tlineFechaI.getText().isEmpty() || tlineFechaF.getText().isEmpty()){
-            
-            
-            JOptionPane.showMessageDialog(null, "Por favor rellen los campos con la fecha inicio de mes y fin de mes");
-            
-            }else{
-            
-            if(tlineIdEmpleado.getText().isEmpty() || tlineSalarioBase.getText().isEmpty() || 
-                    tlineISSS.getText().isEmpty() || tlineAFP.getText().isEmpty() || tlineTotal.getText().isEmpty()){
-            
-            JOptionPane.showMessageDialog(null, "Por favor presione el boton Calcular para obtener los datos de la planilla");
-            
-            }else{
-                //Procedimiento de insertar
-            
-                mod.setIdempleado(tlineIdEmpleado.getText());
-                mod.setNombre(tlineNombre.getText());
-                mod.setSalario_base(Double.parseDouble(tlineSalarioBase.getText()));
-                mod.setIsss(Double.parseDouble(tlineISSS.getText()));
-                mod.setAfp(Double.parseDouble(tlineAFP.getText()));
-                mod.setDescuento(0.0);
-                mod.setTotal(Double.parseDouble(tlineTotal.getText()));
-                mod.setFecha(Date.valueOf(tlineFechaF.getText()));
-                
-            
-                
-                if (modC.registrar(mod)) {
 
-                    JOptionPane.showMessageDialog(null, "Planilla creada");
-                    Mostrar();
-                    Limpiar();
+            if (tlineFechaI.getText().isEmpty() || tlineFechaF.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(null, "Por favor rellen los campos con la fecha inicio de mes y fin de mes");
+
+            } else {
+
+                if (tlineIdEmpleado.getText().isEmpty() || tlineSalarioBase.getText().isEmpty()
+                        || tlineISSS.getText().isEmpty() || tlineAFP.getText().isEmpty() || tlineTotal.getText().isEmpty()) {
+
+                    JOptionPane.showMessageDialog(null, "Por favor presione el boton Calcular para obtener los datos de la planilla");
+
                 } else {
+                    //Procedimiento de insertar
 
-                    JOptionPane.showMessageDialog(null, "Error al crear planilla");
+                    mod.setIdempleado(tlineIdEmpleado.getText());
+                    mod.setNombre(tlineNombre.getText());
+                    mod.setSalario_base(Double.parseDouble(tlineSalarioBase.getText()));
+                    mod.setIsss(Double.parseDouble(tlineISSS.getText()));
+                    mod.setAfp(Double.parseDouble(tlineAFP.getText()));
+                    mod.setDescuento(0.0);
+                    mod.setTotal(Double.parseDouble(tlineTotal.getText()));
+                    mod.setFecha(Date.valueOf(tlineFechaF.getText()));
 
-                }
-                
-            }//fin de las validaciones
-        
-         }
-        
-        
+                    if (modC.registrar(mod)) {
+
+                        JOptionPane.showMessageDialog(null, "Planilla creada");
+                        Mostrar();
+                        Limpiar();
+                    } else {
+
+                        JOptionPane.showMessageDialog(null, "Error al crear planilla");
+
+                    }
+
+                }//fin de las validaciones
+
+            }
+
         }
 
-        
-        
+
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-         mod = new Pago();
+        mod = new Pago();
         modC = new ConsultaPago();
-        
-        if(tlineId.getText().isEmpty()){
-        
-        
-        JOptionPane.showMessageDialog(null, "Seleccione el registro que desea eliminar de la tabla Planilla");
-        
-        }else{
-            
-                mod.setId(Integer.parseInt(tlineId.getText()));
-        
-                if (modC.eliminar(mod)) {
 
-                    JOptionPane.showMessageDialog(null, "Planilla eliminada");
-                    Mostrar();
-                    Limpiar();
-                } else {
+        if (tlineId.getText().isEmpty()) {
 
-                    JOptionPane.showMessageDialog(null, "Error al eliminar la planilla");
+            JOptionPane.showMessageDialog(null, "Seleccione el registro que desea eliminar de la tabla Planilla");
 
-                }
-        
+        } else {
+
+            mod.setId(Integer.parseInt(tlineId.getText()));
+
+            if (modC.eliminar(mod)) {
+
+                JOptionPane.showMessageDialog(null, "Planilla eliminada");
+                Mostrar();
+                Limpiar();
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Error al eliminar la planilla");
+
+            }
+
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void TablaPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPagoMouseClicked
         // TODO add your handling code here:
-        
+
         TableModel model = TablaPago.getModel();
-        tlineId.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 0));
-         tlineIdEmpleado.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 1));
-          tlineSalarioBase.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 2));
-           tlineISSS.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 3));
-            tlineAFP.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 4));
-             tlineFecha.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 6));
-              tlineTotal.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 7));
-       
-      
-        
+        tlineId.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 0));
+        tlineIdEmpleado.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 1));
+        tlineSalarioBase.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 2));
+        tlineISSS.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 3));
+        tlineAFP.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 4));
+        tlineFecha.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 6));
+        tlineTotal.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 7));
+
+
     }//GEN-LAST:event_TablaPagoMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

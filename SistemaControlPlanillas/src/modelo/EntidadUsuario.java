@@ -9,12 +9,15 @@ package modelo;
  *
  * @author gabri
  */
+
+//CLASE ENTIDADUSUARIO
 public class EntidadUsuario {
     int id;
     String nombre;
     String password;
     String id_rol;
 
+    //Metodos set y get
     public EntidadUsuario() {
     }
 

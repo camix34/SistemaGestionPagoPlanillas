@@ -18,11 +18,14 @@ import java.sql.SQLException;
  */
 public class ConsultaPago extends Conexion{
     
+    //atributos
     public Conexion conn = new Conexion();
       PreparedStatement ps;
       ResultSet rs;
   
+      //METODOS
 
+      //Funcion crear o  registrar una planilla
     public boolean registrar(Pago p) {
 
        
@@ -59,6 +62,7 @@ public class ConsultaPago extends Conexion{
 
     }
 
+    //Funcion modificar planilla de pago - este por el momento no fue usada
     public boolean modificar(Pago p) {
 
        
@@ -96,6 +100,7 @@ public class ConsultaPago extends Conexion{
 
     }
 
+    //Funcion para eliminar una planilla de un empleado
     public boolean eliminar(Pago p) {
 
       
@@ -125,7 +130,7 @@ public class ConsultaPago extends Conexion{
 
     }
     
-    
+    //Funcion que me calcula el salario base de un empleado dadas 2 fechas(un mes)
     public Double salarioBase(Pago p){
     
         Double salariobase = 0.0;

@@ -12,6 +12,8 @@ package modelo;
  *
  * @author toshiba
  */
+
+//Clase empleados con la informacion personal de los empleados
 public class empleados {
    
     public int id_empleado;

@@ -16,9 +16,15 @@ import org.apache.commons.codec.binary.Base64;
  *
  * @author carlo
  */
+//Clase que contiene los metetods para encriptar y desencriptar la password
+
 public class Seguridad {
+    
+    //atributos
      String secretKey = "Seguridad";
     
+     //Metodos
+     //Funcion que me encripta una cadena de texto(password)
         public String ecnode(String cadena) {
         String encriptacion = "";
         try {
@@ -38,6 +44,7 @@ public class Seguridad {
         return encriptacion;
     }
 
+        //funcion que desencripta una cadena de texto(password)
     public String deecnode(String cadenaEncriptada) {
         String desencriptacion = "";
         try {

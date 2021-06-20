@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package Frm;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -19,17 +22,45 @@ import javax.swing.JOptionPane;
  * @author toshiba
  */
 public class FormEmpleados extends javax.swing.JFrame {
-   public static ControTrabajadores con;
-   public static DefaultTableModel modelTable;
-   public static ResultSet registro;
+
+    public static ControTrabajadores con;
+    public static DefaultTableModel modelTable;
+    public static ResultSet registro;
 
     /**
      * Creates new form FormEmpleados
      */
     public FormEmpleados() {
         initComponents();
+        
+            Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
+
+        //CAMPOS DE TEXTO MODIFICACION
+        TxtFecha.setText(formatoFecha.format(fecha));
+        TxtFecha.setEditable(true);
+        TxtEditFecha.setEditable(false);
+
+        //Funciones inciales para cargar informacion al formulario
         recargar();
         agregarItems();
+    }
+    
+    void Limpiar(){
+    
+    TxtDireccion.setText("");
+    TxtDui.setText("");
+    TxtEditDireccion.setText("");
+    TxtEditDui.setText("");
+    TxtEditFecha.setText("");
+    TxtEditNombre.setText("");
+    TxtEditTelefono.setText("");
+    TxtFecha.setText("");
+    TxtID.setText("");
+    TxtNombre.setText("");
+    TxtTelefono.setText("");
+    
+    
     }
 
     /**
@@ -428,109 +459,110 @@ public class FormEmpleados extends javax.swing.JFrame {
 
     private void BtnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInsertarActionPerformed
         // TODO add your handling code here:
-           if(TxtNombre.getText().isEmpty() || TxtDui.getText().isEmpty() || TxtTelefono.getText().isEmpty() || TxtDireccion.getText().isEmpty() || TxtFecha.getText().isEmpty()){
-                
-                JOptionPane.showMessageDialog(this, "Error los campos de texto no deben estar vacios");
-           }else{
-               System.out.println("puede continuar");
-               empleados per  = new empleados();
-                   String combo = (String)ComboCargo.getSelectedItem();
-     
-        per.nombre= TxtNombre.getText();
-        per.dui= TxtDui.getText();
-         per.cargo= combo;
-         per.telefono= TxtTelefono.getText();
-         per.direccion = TxtDireccion.getText();
-         per.fecha_contratacion= TxtFecha.getText();
-          
-         
-         if (con.insertar(per)){
-             
-             System.out.println("se inserto correctamente");
-             JOptionPane.showMessageDialog(this, "se inserto correctamente");
-         }else{
+        if (TxtNombre.getText().isEmpty() || TxtDui.getText().isEmpty() || TxtTelefono.getText().isEmpty() || TxtDireccion.getText().isEmpty() || TxtFecha.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Error los campos de texto no deben estar vacios");
+        } else {
+            System.out.println("puede continuar");
+            empleados per = new empleados();
+            String combo = (String) ComboCargo.getSelectedItem();
+
+            per.nombre = TxtNombre.getText();
+            per.dui = TxtDui.getText();
+            per.cargo = combo;
+            per.telefono = TxtTelefono.getText();
+            per.direccion = TxtDireccion.getText();
+            per.fecha_contratacion = TxtFecha.getText();
+
+            if (con.insertar(per)) {
+
+                System.out.println("se inserto correctamente");
+                Limpiar();
+                JOptionPane.showMessageDialog(this, "se inserto correctamente");
+            } else {
                 System.out.println("no se inserto correctamente");
-         }
-         recargar();
-           }
-        
-        
+            }
+            recargar();
+        }
+
+
     }//GEN-LAST:event_BtnInsertarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-                TableModel model = jTable1.getModel();
-        TxtID.setText(""+model.getValueAt(jTable1.getSelectedRow(), 0));
-        TxtEditNombre.setText(""+model.getValueAt(jTable1.getSelectedRow(), 1));
-        TxtEditDui.setText(""+model.getValueAt(jTable1.getSelectedRow(), 2));
-        
-        TxtEditDireccion.setText(""+model.getValueAt(jTable1.getSelectedRow(), 4));
-        TxtEditTelefono.setText(""+model.getValueAt(jTable1.getSelectedRow(), 5));
-        TxtEditFecha.setText(""+model.getValueAt(jTable1.getSelectedRow(), 6));
+        TableModel model = jTable1.getModel();
+        TxtID.setText("" + model.getValueAt(jTable1.getSelectedRow(), 0));
+        TxtEditNombre.setText("" + model.getValueAt(jTable1.getSelectedRow(), 1));
+        TxtEditDui.setText("" + model.getValueAt(jTable1.getSelectedRow(), 2));
+
+        TxtEditDireccion.setText("" + model.getValueAt(jTable1.getSelectedRow(), 4));
+        TxtEditTelefono.setText("" + model.getValueAt(jTable1.getSelectedRow(), 5));
+        TxtEditFecha.setText("" + model.getValueAt(jTable1.getSelectedRow(), 6));
     }//GEN-LAST:event_jTable1MouseClicked
 
     //boton de modificar 
     private void BtnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnModificarMouseClicked
-       // TODO add your handling code here:
-      
-       //validacion campos de texno no esten vacios
-       if(TxtID.getText().isEmpty() || TxtEditNombre.getText().isEmpty() || TxtEditDui.getText().isEmpty()
-               || TxtEditDireccion.getText().isEmpty() || TxtEditTelefono.getText().isEmpty()){
-           JOptionPane.showMessageDialog(this, "Error seleccione un empleado para editar y no deje los campos vacios");
-       } 
-       else{
-             System.out.println("Puede continuar");
-       }
-        
-        String combo = (String)comboCargo2.getSelectedItem();
-           empleados p = new empleados();
-        p.nombre=TxtEditNombre.getText();
-         p.dui=TxtEditDui.getText();
-          p.cargo= combo;
-          p.direccion=TxtEditDireccion.getText();
-         p.telefono=TxtEditTelefono.getText(); 
+        // TODO add your handling code here:
+
+        //validacion campos de texno no esten vacios
+        if (TxtID.getText().isEmpty() || TxtEditNombre.getText().isEmpty() || TxtEditDui.getText().isEmpty()
+                || TxtEditDireccion.getText().isEmpty() || TxtEditTelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error seleccione un empleado para editar y no deje los campos vacios");
+        } else {
+            System.out.println("Puede continuar");
+        }
+
+        String combo = (String) comboCargo2.getSelectedItem();
+        empleados p = new empleados();
+        p.nombre = TxtEditNombre.getText();
+        p.dui = TxtEditDui.getText();
+        p.cargo = combo;
+        p.direccion = TxtEditDireccion.getText();
+        p.telefono = TxtEditTelefono.getText();
         p.id_empleado = Integer.parseInt(TxtID.getText());
-            
-          con.editar(p);
-               if (con.editar(p)){
-             
-             System.out.println("se edito correctamente");
-             JOptionPane.showMessageDialog(this, "se Modifico correctamente");
-           
-         }else{
-                System.out.println("no se edito correctamente");
-         }
-         recargar();
+
+        con.editar(p);
+        if (con.editar(p)) {
+
+            System.out.println("se edito correctamente");
+            Limpiar();
+            JOptionPane.showMessageDialog(this, "se Modifico correctamente");
+
+        } else {
+            System.out.println("no se edito correctamente");
+        }
+        recargar();
     }//GEN-LAST:event_BtnModificarMouseClicked
 
     //boton de eliminar empleados
     private void BtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEliminarMouseClicked
         // TODO add your handling code here:
-        if(TxtID.getText().isEmpty()){
+        if (TxtID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Error Seleccione un elemento para eliminar");
-        }else{
-             int id = Integer.parseInt(TxtID.getText());
-                  if (con.Eliminar(id)){
-             
-             System.out.println("se Elimino correctamente");
-             JOptionPane.showMessageDialog(this, "se Elimino correctamente");
-         }else{
+        } else {
+            int id = Integer.parseInt(TxtID.getText());
+            if (con.Eliminar(id)) {
+
+                System.out.println("se Elimino correctamente");
+                Limpiar();
+                JOptionPane.showMessageDialog(this, "se Elimino correctamente");
+            } else {
                 System.out.println("no se Elimino correctamente");
-         }
-         recargar();
+            }
+            recargar();
         }
-         
+
     }//GEN-LAST:event_BtnEliminarMouseClicked
 
     private void ComboCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCargoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboCargoActionPerformed
 
-     //validacion entrada solo numeros
+    //validacion entrada solo numeros
     private void TxtDuiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDuiKeyTyped
-        
+
         char c = evt.getKeyChar();
-        if(c<'0' || c>'9'){
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_TxtDuiKeyTyped
@@ -538,26 +570,26 @@ public class FormEmpleados extends javax.swing.JFrame {
     //validacion entrada solo numeros
     private void TxtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTelefonoKeyTyped
         // TODO add your handling code here:
-        
-          char c = evt.getKeyChar();
-        if(c<'0' || c>'9'){
+
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_TxtTelefonoKeyTyped
 //validacion entrada solo numeros
     private void TxtEditDuiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEditDuiKeyTyped
         // TODO add your handling code here:
-        
-           char c = evt.getKeyChar();
-        if(c<'0' || c>'9'){
+
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_TxtEditDuiKeyTyped
 //validacion entrada solo numeros
     private void TxtEditTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEditTelefonoKeyTyped
         // TODO add your handling code here:
-           char c = evt.getKeyChar();
-        if(c<'0' || c>'9'){
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_TxtEditTelefonoKeyTyped
@@ -565,20 +597,20 @@ public class FormEmpleados extends javax.swing.JFrame {
     //Validacion entrada solo letras
     private void TxtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNombreKeyTyped
         // TODO add your handling code here:
-             char c = evt.getKeyChar();
-        if((c<'a' || c>'z')&& (c<'A' ||c>'Z')){
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_TxtNombreKeyTyped
 //Validacion entrada solo letras
     private void TxtEditNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEditNombreKeyTyped
         // TODO add your handling code here:
-            char c = evt.getKeyChar();
-        if((c<'a' || c>'z')&& (c<'A' ||c>'Z')){
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_TxtEditNombreKeyTyped
 
     /**
@@ -615,46 +647,48 @@ public class FormEmpleados extends javax.swing.JFrame {
             }
         });
     }
-      public void  recargar(){
-        
-                  //creando la instancia de la clase
-       con =  new ControTrabajadores();
-        modelTable = new DefaultTableModel(); 
-       jTable1.setModel(modelTable);
-       
-       registro = con.Cargar();
-       modelTable.addColumn("ID");
-       modelTable.addColumn("Nombre");
-       modelTable.addColumn("DUI");
-       modelTable.addColumn("Cargo");
-       modelTable.addColumn("direccion");
-       modelTable.addColumn("Telefono");
-       modelTable.addColumn("Fecha");
-       Object[] data= new  Object[6];
-       
+
+    public void recargar() {
+
+        //creando la instancia de la clase
+        con = new ControTrabajadores();
+        modelTable = new DefaultTableModel();
+        jTable1.setModel(modelTable);
+
+        registro = con.Cargar();
+        modelTable.addColumn("ID");
+        modelTable.addColumn("Nombre");
+        modelTable.addColumn("DUI");
+        modelTable.addColumn("Cargo");
+        modelTable.addColumn("direccion");
+        modelTable.addColumn("Telefono");
+        modelTable.addColumn("Fecha");
+        Object[] data = new Object[7];
+
         try {
-            while(registro.next()){
-                for(int i = 0;i<6;i++){
-                    
-                    data[i]=registro.getObject(i+1);
+            while (registro.next()) {
+                for (int i = 0; i < 7; i++) {
+
+                    data[i] = registro.getObject(i + 1);
                 }
                 modelTable.addRow(data);
-                
-            }} catch (SQLException ex) {
+
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(FormEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      public void agregarItems(){
-           ComboCargo.removeAllItems();
-           comboCargo2.removeAllItems();
-           ComboCargo.addItem("Sastre");
-           ComboCargo.addItem("Costurero/a");
-           
-           comboCargo2.addItem("Sastre");
-           comboCargo2.addItem("Costurero/a");
-           
-      
-      }
+
+    public void agregarItems() {
+        ComboCargo.removeAllItems();
+        comboCargo2.removeAllItems();
+        ComboCargo.addItem("Sastre");
+        ComboCargo.addItem("Costurero/a");
+
+        comboCargo2.addItem("Sastre");
+        comboCargo2.addItem("Costurero/a");
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;

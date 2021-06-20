@@ -22,6 +22,7 @@ private String url,user,pass;
 private Statement estate;
 private ResultSet respuesta;
 
+//Clase para administrar las consultas de la tabla empleados de la base de datos
 public ControTrabajadores(){
     url="jdbc:mysql://localhost:3306/bd_planilla";
     user = "root";
@@ -45,6 +46,7 @@ public ControTrabajadores(){
         ControTrabajadores p = new ControTrabajadores();
     }
     
+    //Funcion que me retorna todos los empleados registrados en la base de datos
         public ResultSet Cargar(){
     try {
         estate = conexion.createStatement();
@@ -58,6 +60,7 @@ public ControTrabajadores(){
         
     }
         
+        //Funcion para cerrar la conexion a la base de datos
          public void cerrarConexion(){
     try {
         conexion.close();
@@ -66,6 +69,7 @@ public ControTrabajadores(){
     }
     }
          
+         //Funcion para Insertar un nuevo empleado a la base de datos
     public boolean insertar(empleados p){
         
     try {
@@ -79,6 +83,7 @@ public ControTrabajadores(){
     }
     }
     
+    //Funcion para modifica la informacion personal del empleado
     public boolean editar(empleados p){
         
     try {
@@ -92,6 +97,7 @@ public ControTrabajadores(){
     }
     }
     
+    //Funcion para eliminar un empleado del sistema
        public boolean Eliminar(int id){
         
     try {

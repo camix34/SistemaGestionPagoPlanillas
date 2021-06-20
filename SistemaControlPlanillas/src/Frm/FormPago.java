@@ -37,7 +37,6 @@ public class FormPago extends javax.swing.JFrame {
     /**
      * Creates new form FormPago
      */
-
     public FormPago() {
         initComponents();
 
@@ -59,6 +58,7 @@ public class FormPago extends javax.swing.JFrame {
 
     }
 
+    //Funcion para mostrar todos los registros de la tabla infopago de la base de datos
     public void Mostrar() {
 
         try {
@@ -508,105 +508,96 @@ public class FormPago extends javax.swing.JFrame {
 
     private void TablaPagoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPagoMouseClicked
         // TODO add your handling code here:
-        
+
         TableModel model = TablaPago.getModel();
-        tlineId.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 0));
-        tlineIdEmpelado.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 1));
-        tlineUnidad.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 3));
-        tlineDescuento.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 4));
-        tlineTotal.setText(""+model.getValueAt(TablaPago.getSelectedRow(), 5));
-        
+        tlineId.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 0));
+        tlineIdEmpelado.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 1));
+        tlineUnidad.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 3));
+        tlineDescuento.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 4));
+        tlineTotal.setText("" + model.getValueAt(TablaPago.getSelectedRow(), 5));
+
     }//GEN-LAST:event_TablaPagoMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        
+
         //Procedimiento
-        
         mod = new InfoPago();
         modC = new ConsultaInfoPago();
 
-        if(tlineId.getText().isEmpty()){
-            
-            JOptionPane.showMessageDialog(null, "Por favor seleccione el registro que desea modificar de la tabla de Pagos");
-        
-        
-        }else{
-            
-            
-            if (tlineIdEmpelado.getText().isEmpty()) {
+        if (tlineId.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(null, "debe seleccionar un empleado para el pago de este dia");
+            JOptionPane.showMessageDialog(null, "Por favor seleccione el registro que desea modificar de la tabla de Pagos");
 
         } else {
 
-            if (tlineUnidad.getText().isEmpty()) {
+            if (tlineIdEmpelado.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(null, "El campo de Unidades no debe estar vacio");
+                JOptionPane.showMessageDialog(null, "debe seleccionar un empleado para el pago de este dia");
 
             } else {
-                
-                mod.setId_Empleado(tlineIdEmpelado.getText());
-                mod.setFecha(java.sql.Date.valueOf(tlineFecha.getText()));
-                mod.setUnidades(Integer.parseInt(tlineUnidad.getText()));
-                mod.setDescuento(Double.parseDouble(tlineDescuento.getText()));
-                mod.setTotal_dia(Double.parseDouble(tlineTotal.getText()));
-                mod.setId(Integer.parseInt(tlineId.getText()));
 
-                if (modC.modificar(mod)) {
+                if (tlineUnidad.getText().isEmpty()) {
 
-                    JOptionPane.showMessageDialog(null, "Registro Modificado");
-                    Limpiar();
-                    Mostrar();
+                    JOptionPane.showMessageDialog(null, "El campo de Unidades no debe estar vacio");
+
                 } else {
 
-                    JOptionPane.showMessageDialog(null, "Error Modificar el registro");
+                    mod.setId_Empleado(tlineIdEmpelado.getText());
+                    mod.setFecha(java.sql.Date.valueOf(tlineFecha.getText()));
+                    mod.setUnidades(Integer.parseInt(tlineUnidad.getText()));
+                    mod.setDescuento(Double.parseDouble(tlineDescuento.getText()));
+                    mod.setTotal_dia(Double.parseDouble(tlineTotal.getText()));
+                    mod.setId(Integer.parseInt(tlineId.getText()));
+
+                    if (modC.modificar(mod)) {
+
+                        JOptionPane.showMessageDialog(null, "Registro Modificado");
+                        Limpiar();
+                        Mostrar();
+                    } else {
+
+                        JOptionPane.showMessageDialog(null, "Error Modificar el registro");
+
+                    }
 
                 }
 
             }
 
         }
-        
-       }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
-         mod = new InfoPago();
+
+        mod = new InfoPago();
         modC = new ConsultaInfoPago();
-    
-                
-                
 
-                
-                if(tlineId.getText().isEmpty()){
-                
-                JOptionPane.showMessageDialog(null, "Por favor seleccione el registro que desea ELIMINAR de la tabla de Pagos");
-                
-                }else{
-                
-                    mod.setId(Integer.parseInt(tlineId.getText()));
-                    
-                 if (modC.eliminar(mod)) {
+        if (tlineId.getText().isEmpty()) {
 
-                    JOptionPane.showMessageDialog(null, "Registro Eliminado");
-                    Limpiar();
-                    Mostrar();
-                } else {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione el registro que desea ELIMINAR de la tabla de Pagos");
 
-                    JOptionPane.showMessageDialog(null, "Error al eliminar el registro");
+        } else {
 
-                }
-                
-                }
-                
-        
+            mod.setId(Integer.parseInt(tlineId.getText()));
+
+            if (modC.eliminar(mod)) {
+
+                JOptionPane.showMessageDialog(null, "Registro Eliminado");
+                Limpiar();
+                Mostrar();
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Error al eliminar el registro");
+
+            }
+
+        }
+
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -618,9 +609,9 @@ public class FormPago extends javax.swing.JFrame {
 
     private void tlineUnidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlineUnidadKeyTyped
         // TODO add your handling code here:
-        
-           char c = evt.getKeyChar();
-        if(c<'0' || c>'9'){
+
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_tlineUnidadKeyTyped

@@ -49,6 +49,9 @@ public class FormPago extends javax.swing.JFrame {
         tlineFecha.setEditable(true);
         tlineIdEmpelado.setEditable(false);
         tlineId.setEditable(false);
+        tlineDescuento.setEditable(false);
+        tlineFecha.setEditable(false);
+        tlineTotal.setEditable(false);
 
         //METODOS INICIALES
         Mostrar();
@@ -167,6 +170,9 @@ public class FormPago extends javax.swing.JFrame {
         tlineUnidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tlineUnidadKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tlineUnidadKeyTyped(evt);
             }
         });
 
@@ -609,6 +615,15 @@ public class FormPago extends javax.swing.JFrame {
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tlineUnidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlineUnidadKeyTyped
+        // TODO add your handling code here:
+        
+           char c = evt.getKeyChar();
+        if(c<'0' || c>'9'){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tlineUnidadKeyTyped
 
     private void Limpiar() {
 

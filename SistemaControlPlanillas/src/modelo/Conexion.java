@@ -15,7 +15,11 @@ import java.util.logging.Logger;
  *
  * @author gabri
  */
+
+//CLASE QUE HACE LA CONEXION ENTRE MYQL Y NEATBEANS JAVA
 public class Conexion {
+    
+    //atributos
      private final String base = "bd_planilla";
     private final String user = "root";
     private final String password = "";
@@ -25,7 +29,7 @@ public class Conexion {
       
       
    
-      
+   //Funcion que me devuleve un objeto de tipo Connection para conectar con la base de datos   
     public Connection Conectar(){
      
           try {

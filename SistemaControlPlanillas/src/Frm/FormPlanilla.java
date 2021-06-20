@@ -47,7 +47,14 @@ public class FormPlanilla extends javax.swing.JFrame {
         
         tlineFechaI.setText(formatoFecha.format(fecha));
         tlineFechaF.setText(formatoFecha.format(fecha));
-        tlineNombre.setVisible(true);
+        tlineNombre.setVisible(false);
+        tlineAFP.setEditable(false);
+        tlineISSS.setEditable(false);
+        tlineId.setEditable(false);
+        tlineIdEmpleado.setEditable(false);
+        tlineSalarioBase.setEditable(false);
+        tlineTotal.setEditable(false);
+        tlineFecha.setEditable(false);
         
         
         

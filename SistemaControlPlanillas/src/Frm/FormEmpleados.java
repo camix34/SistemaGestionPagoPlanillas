@@ -647,11 +647,11 @@ public class FormEmpleados extends javax.swing.JFrame {
       public void agregarItems(){
            ComboCargo.removeAllItems();
            comboCargo2.removeAllItems();
-           ComboCargo.addItem("sastre");
-           ComboCargo.addItem("empacador");
+           ComboCargo.addItem("Sastre");
+           ComboCargo.addItem("Costurero/a");
            
-           comboCargo2.addItem("sastre");
-           comboCargo2.addItem("empacador");
+           comboCargo2.addItem("Sastre");
+           comboCargo2.addItem("Costurero/a");
            
       
       }

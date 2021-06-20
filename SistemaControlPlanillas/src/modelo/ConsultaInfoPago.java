@@ -19,6 +19,8 @@ import java.sql.SQLException;
  *
  * @author reyna
  */
+
+//CLASE PARA LAS CONSULTAS DE LA TABLA  INFO DE PAGO
 public class ConsultaInfoPago extends Conexion {
 
   
@@ -26,7 +28,7 @@ public class ConsultaInfoPago extends Conexion {
       PreparedStatement ps;
       ResultSet rs;
   
-
+//FUNCION PARA REGISTRAR UN REGISTRO
     public boolean registrar(InfoPago p) {
 
        
@@ -59,6 +61,8 @@ public class ConsultaInfoPago extends Conexion {
         }
 
     }
+    
+    //FUNCION PARA MODIFICAR UN REGISTRO DE LA TABLA INFO PAGO
 
     public boolean modificar(InfoPago p) {
 
@@ -93,6 +97,8 @@ public class ConsultaInfoPago extends Conexion {
         }
 
     }
+    
+    //FUNCION PARA ELIMINAR UN REGISTRO DE LA TABLA INFO PAGO 
 
     public boolean eliminar(InfoPago p) {
 
@@ -122,6 +128,8 @@ public class ConsultaInfoPago extends Conexion {
         }
 
     }
+    
+    //FUNCION PARA BUSCAR UN REGISTRO DE LA TABLA INFO PAGO
 
     public boolean buscar(InfoPago p) {
 

@@ -33,6 +33,8 @@ public class FormPago extends javax.swing.JFrame {
     public static DefaultTableModel modelTable;
     public static ResultSet registro;
     public static ControTrabajadores conn;
+    
+    
 
     /**
      * Creates new form FormPago
@@ -105,6 +107,7 @@ public class FormPago extends javax.swing.JFrame {
         }
 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -407,6 +410,8 @@ public class FormPago extends javax.swing.JFrame {
 
         mod = new InfoPago();
         modC = new ConsultaInfoPago();
+        
+        
 
         if (tlineIdEmpelado.getText().isEmpty()) {
 
@@ -425,7 +430,9 @@ public class FormPago extends javax.swing.JFrame {
                 mod.setUnidades(Integer.parseInt(tlineUnidad.getText()));
                 mod.setDescuento(Double.parseDouble(tlineDescuento.getText()));
                 mod.setTotal_dia(Double.parseDouble(tlineTotal.getText()));
-
+                
+                
+                
                 if (modC.registrar(mod)) {
 
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
